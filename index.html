@@ -1,44 +1,182 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Cadastra Pet</title>
+    <title> Cadastro dos devs</title>
 </head>
 <body>
     <script src="console.js"></script>
- <main>
-    <h1>Formulário de Cadastro</h1>
-
-    <section id="formulario">
-        <article id="info_dono">
-            <h2>Info do Usuário:</h2>
-            <label>Nome</label>
-            <input id="nameUser" type="text" placeholder="Digite o seu nome:">
-        </article>
-
-        <article id="info_pet">
-            <h2>Info do Pet</h2>
-            <label>Nome do Pet</label>
-            <input id="namePet" type="text" placeholder="Digite o nome do pet:">
-            <label>Raça do Pet</label>
-            <input id="raca" type="text"placeholder="Digite a raça dele:"> 
-            <label>Idade do Pet</label>
-            <input id="idadepet" type="number" placeholder="Digite a idade do pet:">
-        </article>
-        <button>Enviar</button>
-    </section>
-    <section id="saida">
-        <label>Nome do Dono <span class="span"></span></label>
-        <label>Nome do Pet <span class="span"></span></label> 
-        <label>Raça do Pet <span class="span"></span></label>
-        <label>Idade do Pet <span class="span"></span></label>
-    </section>
-    
- </main>
-    
-
-    <script src="script.js"></script>
+    <div class="background"></div>
+     <div class="content">
+         <h1>Cadastro para vagas de emprego DEVS</h1>
+        <form id="form">
+            <div>
+                <input type="text" placeholder="Digite seu nome" class="inputs required" oninput="nameValidate()">
+                <span class="span-required">Nome deve ter no mínimo 3 caracteres</span>
+            </div>
+            <div>
+                <input type="text" placeholder="Digite email" class="inputs required" oninput="emailValidate()">
+                <span class="span-required">Digite um email válido</span>
+            </div>
+            <div>
+                <input type="password" placeholder="Senha" class="inputs required" oninput="mainPasswordValidate()">
+                <span class="span-required">Digite uma senha com no mínimo 8 caracteres</span>
+            </div>
+            <div>
+                <input type="password" placeholder="Repita sua senha" class="inputs required" oninput="comparePassword()">
+                <span class="span-required">Senhas devem ser compatíveis</span>
+            </div>
+            <textarea class="inputs" name="descricao" id="descricao" cols="25" rows="1o" placeholder="Fale um pouco sobre você..."></textarea>
+            <p>Sexo:</p>
+            <div class="box-select"> 
+             <div>
+                <input type="radio" id="m" value="m" name="sexo">
+                <label for="m">Masculino</label>
+             </div>
+             <div>
+                <input type="radio" id="f" value="f" name="sexo">
+                <label for="f">Feminino</label>
+             </div>
+             <div>
+                <input type="radio" id="o" value="o" name="sexo">
+                <label for="o">Outros</label>
+             </div>
+            </div>
+            <p>Quais são suas experiências em programação?</p>
+              <div box-select>
+                <div>
+                    <input type="checkbox" id="html" value="html" name="experiencias">
+                    <label for="html">Html</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="css" value="css" name="experiencias">
+                    <label for="css">Css</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="js" value="jss" name="experiencias">
+                    <label for="js">JavaScript</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="php" value="php" name="experiencias">
+                    <label for="php">PHP</label>
+                </div>
+              </div>
+              <button type="submit">Enviar</button>
+        </form>
+     </div>
 </body>
+<!--script>
+   const form   = document.getElementById('form');
+   const campos = document.querySelectorAll('.required');
+   const spans  = document.querySelectorAll('.span-required');
+   const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*$/;
+
+   form.addEventListener('submit', (event) => {
+       event.preventDefault();
+       nameValidate();
+       emailValidate();
+       mainPasswordValidate();
+       comparePassword();
+   });
+
+   function setError(index){
+   campos[index].style.border = '2px solid #e63636';
+   spans[index].style.display = 'block';
+   }
+
+   function removeError(index){
+   campos[index].style.border = '';
+   spans[index].style.display = 'none';
+   }
+
+   function nameValidate(){
+       if(campos[0].value.lenght < 3)
+       {
+            setError(0);
+       }
+       else
+       {
+            removeError(0);
+       }
+   }
+
+   function emailValidate(){
+       if(!emailRegex.test(campos[1].value))
+       {
+            setError(1);
+       }
+       else
+       {
+            removeError(1);
+       }
+   }
+   function mainPasswordValidate(){
+        if(campos[2].value.lenght < 8)
+        {
+            setError(2);
+        }  
+        else
+        {
+            removeError(2);
+            comparePassword();
+        }
+   }
+
+   function comparePassword(){
+    if(campos[2].value == campos [3].value && campos [3].value.lenght >= 8)
+   {
+            removeError(3);
+   }
+   else
+   {
+            setError(3);
+   }
+   }
+</script--->
+
+<script>
+    function validarCadastro() {
+        // Armazenar os valores dos campos em um array
+        let campos = [
+            { nome: 'nome', valor: document.getElementById('nome').value, valida: validaNome },
+            { nome: 'email', valor: document.getElementById('email').value, valida: validaEmail },
+            { nome: 'senha', valor: document.getElementById('senha').value, valida: validaSenha },
+            { nome: 'senha2', valor: document.getElementById('senha2').value, valida: validaSenha2 }
+        ];}
+        for (let campo of campos) {
+            if (!campo.valida(campo.valor)) {
+                document.getElementById('erro').style.display = 'block';
+                document.getElementById('erro').innerText = `Erro: O campo ${campo.nome} é inválido.`;
+                return false;
+            }
+        }
+
+        // Se todas as validações passarem
+        return true;
+    
+
+    // Função para validar o nome (mínimo de 3 caracteres)
+    function validaNome(nome) {
+        return nome.length >= 3;
+    }
+
+    // Função para validar o e-mail usando uma expressão regular
+    function validaEmail(email) {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return regex.test(email);
+    }
+
+    // Função para validar a senha (mínimo de 6 caracteres)
+    function validaSenha(senha) {
+        return senha.length >= 6;
+    }
+
+    // Função para validar se a senha repetida é igual à original
+    function validaSenha2(senha2) {
+        const senha = document.getElementById('senha').value;
+        return senha === senha2;
+    }
+</script>
 </html>
